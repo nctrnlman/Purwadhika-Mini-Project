@@ -10,6 +10,7 @@ export const userSlice = createSlice({
       phone: "",
       store: "",
       email: "",
+      isActive: false,
     },
   },
   reducers: {
@@ -27,11 +28,27 @@ export function loginUser(data) {
     const response = await Axios.post("http://localhost:8001/auth/login", data);
     if (response.data.success) {
       dispatch(setUser(response.data.data));
-      // localStorage.setItem("user_token", response.data.token);
+      localStorage.setItem("user_token", response.data.token);
       console.log(response.data);
       alert("im success");
     } else {
       alert(response.data.message);
     }
+  };
+}
+
+export function checkLogin(token) {
+  return async (dispatch) => {
+    console.log(token);
+    const response = await Axios.post(
+      "http://localhost:8001/auth/check-login",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    dispatch(setUser(response.data.data));
   };
 }

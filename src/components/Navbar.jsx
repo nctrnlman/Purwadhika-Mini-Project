@@ -5,11 +5,26 @@ function Navbar() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-cyan-600  flex flex-row justify-between m-auto px-20 py-5 ">
-      <div className="text-3xl font-serif font-bold">kasa</div>
-      <div className="flex gap-10">
-        <button onClick={() => navigate("/register")}>Register</button>
-        <button onClick={() => navigate("/login")}>Login</button>
+    <div className="w-full h-[80px] border-b">
+      <div className="flex justify-between m-auto w-3/4 h-full items-center ">
+        <div className="text-5xl font-serif font-bold text-[#20B486]">Casa</div>
+
+        <div className="flex items-center gap-4">
+          <button onClick={() => navigate("/")}>Home</button>
+          <button>About</button>
+          <button>Platform</button>
+          <button>Pricing</button>
+        </div>
+
+        <div className="flex gap-7">
+          <button
+            className="px-3 py-2 rounded-md bg-[#20B486] text-white font-bold"
+            onClick={() => navigate("/register")}
+          >
+            Register your account
+          </button>
+          <button onClick={() => navigate("/login")}>Login</button>
+        </div>
       </div>
     </div>
   );
