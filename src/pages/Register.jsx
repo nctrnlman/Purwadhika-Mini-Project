@@ -51,7 +51,7 @@ function Register() {
                 <div className="w-full max-w-md space-y-8">
                   <div>
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                      Register your account
+                      Register
                     </h2>
                   </div>
                   <Form className="mt-8 space-y-6" action="#" method="POST">
@@ -157,7 +157,7 @@ function Register() {
                     <div>
                       <button
                         type="submit"
-                        className="group relative flex w-full justify-center rounded-md bg-cyan-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="group relative flex w-full justify-center rounded-md bg-[#20B486] px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       >
                         Register
                       </button>
