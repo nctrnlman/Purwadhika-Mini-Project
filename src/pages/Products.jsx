@@ -5,20 +5,28 @@ function Products() {
   const [results, setResults] = useState({});
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(2);
-
+  const [sort,setSort] = useState("nameZtoA")
+  const [filter,setFilter]=useState()
+  const [open, setOpen] = React.useState(false);
+  const categories = results.categories
+  const handleOpen = () => {
+    setOpen(!open);
+  };
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:8001/product?page=${page}&limit=${limit}`
-        );
-        setResults(res.data);
+        let url = `http://localhost:8001/product?page=${page}&limit=${limit}&sort=${sort}`;
+      if (filter) {
+        url += `&filter=${filter}`;
+      }
+      const res = await axios.get(url);
+      setResults(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     fetchProducts();
-  }, [page, limit]);
+  }, [page, limit,sort,filter]);
 
   const handlePrevClick = () => {
     setPage(page - 1);
@@ -27,11 +35,51 @@ function Products() {
   const handleNextClick = () => {
     setPage(page + 1);
   };
+  const nameAsc = () => {
+    setSort("nameAtoZ");
+  };
+  const nameDesc = () => {
+    setSort("nameZtoA");
+  };
+  const priceHigh = () => {
+    setSort("priceHighLow");
+  };
+  const priceLow = () => {
+    setSort("priceLowHigh");
+  };
 
+  const filterProduct = (categoryId) => {
+    setFilter(categoryId);
+    console.log(categoryId)
+    setPage(1);
+  };
   return (
     <div className="flex justify-center">
       <div className="flex flex-col ">
         <h1 className="text-slate-500">Products</h1>
+        <div>
+      <button onClick={handleOpen}>Sort by</button>
+      {open ? 
+      <div className="flex flex-row justify-evenly">
+      <div className="flex flex-col">
+        <button onClick={nameAsc}>Name ASC</button>
+        <button onClick={nameDesc}>Name desc</button>
+        <button onClick={priceHigh}>Price High</button>
+        <button onClick={priceLow}>Price Low</button>
+      </div> 
+      <div className="flex flex-col">
+  {categories.map((category) => (
+    <button key={category} onClick={() =>
+      
+       filterProduct(category.id)}>{category}</button>
+  ))}
+</div>
+
+      </div>
+      
+      :
+       <div></div>}
+    </div>
         <div className="products">
           {results.results &&
             results.results.map((product) => (
